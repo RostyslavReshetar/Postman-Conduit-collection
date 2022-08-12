@@ -1,0 +1,2512 @@
+{
+	"info": {
+		"_postman_id": "c4ffafee-888a-424c-b0d2-926e5c7f49da",
+		"name": "Postman Practice [Rostyslav Reshetar]",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22207144"
+	},
+	"item": [
+		{
+			"name": "Registration",
+			"item": [
+				{
+					"name": "Registration with blank password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors key\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.property(\"errors\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about blank passoword\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.password).to.eql(\"can't be blank\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"{{$randomWord}}{{randomInt}}\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration with blank username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"  pm.expect(jsonData.errors).to.have.all.keys(\"username\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about invalid username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.username[0]).to.eql(\"Username must start with a letter, have no spaces, and be 3 - 40 characters.\")\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"Somedata\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration with blank email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"  pm.expect(jsonData.errors).to.have.all.keys(\"email\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about invalid username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.email[0]).to.eql(\"This email does not seem valid.\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"{{$randomWord}}{{$randomInt}}\",\r\n        \"email\": \"\",\r\n        \"password\": \"Somedata\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration with all blank fields",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors key\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about blank passoword\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.password).to.eql(\"can't be blank\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"\",\r\n        \"email\": \"\",\r\n        \"password\": \"\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration with spaces in username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"  pm.expect(jsonData.errors).to.have.all.keys(\"username\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about invalid username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.username[0]).to.eql(\"Username must start with a letter, have no spaces, and be 3 - 40 characters.\")\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"    Space    Space   \",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"Somedata\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration with spaces in email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"  pm.expect(jsonData.errors).to.have.all.keys(\"email\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about invalid username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.email[0]).to.eql(\"This email does not seem valid.\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"{{$randomWord}}{{$randomInt}}\",\r\n        \"email\": \"   {{$randomEmail}}  \",\r\n        \"password\": \"Somedata\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration without '@' symbol in email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"  pm.expect(jsonData.errors).to.have.all.keys(\"email\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about invalid username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.email[0]).to.eql(\"This email does not seem valid.\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"{{$randomWord}}{{$randomInt}}\",\r\n        \"email\": \"invalidEmail\",\r\n        \"password\": \"Somedata\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration with existing username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors key\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about taken username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.username[0]).to.eql(\"This username is taken.\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"rostik\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"{{$randomWord}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration with number values in username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"  pm.expect(jsonData.errors).to.have.all.keys(\"username\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about invalid username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.username[0]).to.eql(\"Username must start with a letter, have no spaces, and be at less than 40 characters.\")\r",
+									"    pm.expect(jsonData.errors.username[1]).to.eql(\"Username must start with a letter, have no spaces, and be 3 - 40 characters.\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"23333333333333333332321223\",\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"Somedata\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration with existing email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors key\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about taken username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.email[0]).to.eql(\"This email is taken.\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"username\": \"{{$randomWord}}{{$randomWord}}\",\r\n        \"email\": \"rostik.210111@gmail.com\",\r\n        \"password\": \"{{$randomWord}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Succesfull login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains all keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"user\")\r",
+									"  pm.expect(jsonData.user).to.have.all.keys(\"username\", \"email\", \"token\", \"bio\", \"image\")\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"The token from pesponse are the same as environment\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.user.token).to.eqls(pm.environment.get('token'));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"email\": \"{{email}}\",\r\n        \"password\": \"{{password}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users/login",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with blank values",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors key\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about blank value\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.email).to.eql(\"can't be blank\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"email\": \"\",\r\n        \"password\": \"\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users/login",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login with unregistered values",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains errors key\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"errors\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about invalid data\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors['email or password']).to.eql(\"is invalid\")\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"password\": \"{{$randomPassword}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}users/login",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "Get all tags",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains tags key\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"tags\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}tags",
+							"host": [
+								"{{url}}tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get articles by tag",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.login)();\r",
+									"eval(environment.createArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains article keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"articles\", \"articlesCount\")\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Tag value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.articles[0].tagList[0]).to.eql(pm.environment.get('tag'))\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"eval(environment.deleteArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}articles?limit=10&tag={{tag}}",
+							"host": [
+								"{{url}}articles"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "tag",
+									"value": "{{tag}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "Comment",
+					"item": [
+						{
+							"name": "Create a comment to article",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"eval(environment.login)();\r",
+											"eval(environment.createArticle)();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"eval(globals.basicSuccessfulTests)();\r",
+											"\r",
+											"\r",
+											"pm.test(\"Response contains comments key\", function () {\r",
+											"  const jsonData = pm.response.json();\r",
+											"  pm.expect(jsonData).to.have.all.keys(\"comment\")\r",
+											"  pm.expect(jsonData.comment).to.have.all.keys(\"id\", \"body\", \"createdAt\", \"updatedAt\", \"author\")\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"eval(environment.deleteComment)();\r",
+											"eval(environment.deleteArticle)();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment\": {\r\n        \"body\": \"treter\"\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}articles/{{slug}}/comments",
+									"host": [
+										"{{url}}articles"
+									],
+									"path": [
+										"{{slug}}",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete comment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											" eval(environment.setUpComment)();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 750ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(750);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}articles/{{slug}}/comments/{{commentId}}",
+									"host": [
+										"{{url}}articles"
+									],
+									"path": [
+										"{{slug}}",
+										"comments",
+										"{{commentId}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get comment",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											" eval(environment.setUpComment)();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"eval(globals.basicSuccessfulTests)();\r",
+											"\r",
+											"\r",
+											"\r",
+											"pm.test(\"Id value from response is the same as environment\", function () {\r",
+											"  const jsonData = pm.response.json();\r",
+											"  pm.expect(jsonData.comments[0].id).to.eql(pm.environment.get('commentId'))\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Body value from response is the same as environment\", function () {\r",
+											"  const jsonData = pm.response.json();\r",
+											"  pm.expect(jsonData.comments[0].body).to.eql(pm.environment.get('commentBody'))\r",
+											"});\r",
+											"\r",
+											"\r",
+											"\r",
+											"eval(environment.deleteComment)();\r",
+											"eval(environment.deleteArticle)();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}articles/{{slug}}/comments",
+									"host": [
+										"{{url}}articles"
+									],
+									"path": [
+										"{{slug}}",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Like",
+					"item": [
+						{
+							"name": "Like an article",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"eval(environment.login)();\r",
+											"eval(environment.createArticle)();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"eval(globals.basicSuccessfulTests)();\r",
+											"\r",
+											"pm.test(\"Chek if like is true\", function () {\r",
+											"  const jsonData = pm.response.json();\r",
+											"  pm.expect(jsonData.article.favorited).to.eql(true);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Chek if like count is more than 0\", function () {\r",
+											"  const jsonData = pm.response.json();\r",
+											"  pm.expect(jsonData.article.favoritesCount).to.be.above(0);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Slug value from response is the same as environment\", function () {\r",
+											"  const jsonData = pm.response.json();\r",
+											"  pm.expect(jsonData.article.slug).to.eql(pm.environment.get('slug'))\r",
+											"});\r",
+											"\r",
+											"eval(environment.deleteArticle)();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}articles/{{slug}}/favorite",
+									"host": [
+										"{{url}}articles"
+									],
+									"path": [
+										"{{slug}}",
+										"favorite"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unlike an article",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"eval(environment.login)();\r",
+											"eval(environment.createArticle)();\r",
+											"eval(environment.likeArticle)();"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"eval(globals.basicSuccessfulTests)();\r",
+											"\r",
+											"\r",
+											"\r",
+											"pm.test(\"Chek if like is false\", function () {\r",
+											"  const jsonData = pm.response.json();\r",
+											"  pm.expect(jsonData.article.favorited).to.eql(false);\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Slug value from response is the same as environment\", function () {\r",
+											"  const jsonData = pm.response.json();\r",
+											"  pm.expect(jsonData.article.slug).to.eql(pm.environment.get('slug'))\r",
+											"});\r",
+											"\r",
+											"\r",
+											"eval(environment.deleteArticle)();"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Token {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}articles/{{slug}}/favorite",
+									"host": [
+										"{{url}}articles"
+									],
+									"path": [
+										"{{slug}}",
+										"favorite"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all articles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains articles key\", function () {\r",
+									"    pm.response.to.have.jsonBody('articles');\r",
+									"    pm.response.to.have.jsonBody('articlesCount');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}articles",
+							"host": [
+								"{{url}}articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get article's page",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.login)();\r",
+									"eval(environment.createArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains articles key\", function () {\r",
+									"  pm.response.to.have.jsonBody('article');\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article).to.have.all.keys(\"slug\", \"title\", \"description\", \"body\", \"createdAt\", \"updatedAt\", \"tagList\", \"favorited\", \"favoritesCount\", \"author\")\r",
+									"  pm.expect(jsonData.article.author).to.have.all.keys(\"username\", \"bio\", \"image\", \"following\")\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Slug value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article.slug).to.eql(pm.environment.get('slug'))\r",
+									"});\r",
+									"\r",
+									"eval(environment.deleteArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}articles/{{slug}}",
+							"host": [
+								"{{url}}articles"
+							],
+							"path": [
+								"{{slug}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get articles of 'My Post' feed",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.login)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Username value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.articles[0].author.username).to.eql(pm.environment.get('usernameTest'))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}articles?limit=10&author={{usernameTest}}",
+							"host": [
+								"{{url}}articles"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "author",
+									"value": "{{usernameTest}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get articles of 'Favorited' feed",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.login)();\r",
+									"eval(environment.createArticle)();\r",
+									"eval(environment.likeArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Username value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.articles[0].author.username).to.eql(pm.environment.get('usernameTest'))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Chek if like is true\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.articles[0].favorited).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Chek if like count is more than 0\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.articles[0].favoritesCount).to.be.above(0);\r",
+									"});\r",
+									"\r",
+									"eval(environment.deleteArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}articles?limit=10&favorited={{usernameTest}}",
+							"host": [
+								"{{url}}articles"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "favorited",
+									"value": "{{usernameTest}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get articles of user's feed",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.login)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains articles key\", function () {\r",
+									"    pm.response.to.have.jsonBody('articles');\r",
+									"    pm.response.to.have.jsonBody('articlesCount');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}articles/feed",
+							"host": [
+								"{{url}}articles"
+							],
+							"path": [
+								"feed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create an article",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains all keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article).to.have.all.keys(\"slug\", \"title\", \"description\", \"body\", \"createdAt\",\r",
+									"  \"updatedAt\", \"tagList\", \"favorited\", \"favoritesCount\", \"author\")\r",
+									"   pm.expect(jsonData.article.author).to.have.all.keys(\"username\", \"bio\", \"image\", \"following\")\r",
+									"});\r",
+									"\r",
+									"\r",
+									"eval(environment.deleteArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.login)();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"article\": {\r\n        \"title\": \"{{$randomLoremWord}}\",\r\n        \"description\": \"{{$randomLoremWord}}\",\r\n        \"body\": \"{{$randomLoremParagraph}}\",\r\n        \"tagList\": [\"{{$randomWord}}\"]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}articles",
+							"host": [
+								"{{url}}articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit the article",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.login)();\r",
+									"eval(environment.createArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Slug value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article.slug).to.eql(pm.environment.get('slug'))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Articles data from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.article.title).to.eql(pm.environment.get('title'))\r",
+									"  pm.expect(jsonData.article.description).to.eql(pm.environment.get('description'))\r",
+									"  pm.expect(jsonData.article.body).to.eql(pm.environment.get('body'))\r",
+									"  pm.expect(jsonData.article.tagList[0]).to.eql(pm.environment.get('tag'))\r",
+									"});\r",
+									"\r",
+									"\r",
+									"eval(environment.deleteArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"article\": {\r\n        \"title\": \"{{title}}\",\r\n        \"description\": \"{{description}}\",\r\n        \"body\": \"{{body}}\",\r\n        \"tagList\": [\"{{tag}}\"]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}articles/{{slug}}",
+							"host": [
+								"{{url}}articles"
+							],
+							"path": [
+								"{{slug}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the article",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.login)();\r",
+									"eval(environment.createArticle)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 750 ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(750);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}articles/{{slug}}",
+							"host": [
+								"{{url}}articles"
+							],
+							"path": [
+								"{{slug}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get logged user's page",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Response contains all keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"   pm.expect(jsonData).to.have.all.keys(\"profile\")\r",
+									"   pm.expect(jsonData.profile).to.have.all.keys(\"username\", \"bio\", \"image\", \"following\")\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Username value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.profile.username).to.eql(pm.environment.get('username'))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}profiles/{{username}}",
+							"host": [
+								"{{url}}profiles"
+							],
+							"path": [
+								"{{username}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user's info with number value in username",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Error messages about invalid username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.username[0]).to.eql(\"Username must start with a letter, have no spaces, and be at less than 40 characters.\")\r",
+									"  pm.expect(jsonData.errors.username[1]).to.eql(\"Username must start with a letter, have no spaces, and be 3 - 40 characters.\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"image\": null,\r\n        \"username\": \"{{$randomInt}}\",\r\n        \"bio\": null,\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTM2ODMsInVzZXJuYW1lIjoidGVzdHR0dCIsImV4cCI6MTY2NTIzMDM2NiwiaWF0IjoxNjYwMDQ2MzY2fQ.X81RtbFGBXEqYAYxeeanWUHyVghpnB5K_4_FVywVhw0\",\r\n        \"effectiveImage\": \"https://static.productionready.io/images/smiley-cyrus.jpg\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user",
+							"host": [
+								"{{url}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user's info without '@' symbol in email",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Error messages about invalid email\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.email[0]).to.eql(\"This email does not seem valid.\")\r",
+									"  pm.expect(jsonData.errors.email[1]).to.eql(\"This email is too long, the maximum size is 254 characters.\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"image\": null,\r\n        \"username\": \"{{$randomWord}}\",\r\n        \"bio\": null,\r\n        \"email\": \"{{$randomInt}}{{$randomInt}}{{$randomInt}}\",\r\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTM2ODMsInVzZXJuYW1lIjoidGVzdHR0dCIsImV4cCI6MTY2NTIzMDM2NiwiaWF0IjoxNjYwMDQ2MzY2fQ.X81RtbFGBXEqYAYxeeanWUHyVghpnB5K_4_FVywVhw0\",\r\n        \"effectiveImage\": \"https://static.productionready.io/images/smiley-cyrus.jpg\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user",
+							"host": [
+								"{{url}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user's info with existing username",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Error message about taken username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.username[0]).to.eql(\"This username is taken.\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"image\": null,\r\n        \"username\": \"rostik\",\r\n        \"bio\": null,\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTM2ODMsInVzZXJuYW1lIjoidGVzdHR0dCIsImV4cCI6MTY2NTIzMDM2NiwiaWF0IjoxNjYwMDQ2MzY2fQ.X81RtbFGBXEqYAYxeeanWUHyVghpnB5K_4_FVywVhw0\",\r\n        \"effectiveImage\": \"https://static.productionready.io/images/smiley-cyrus.jpg\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user",
+							"host": [
+								"{{url}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user's info woth existing email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"pm.test(\"Error message about taken email\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.errors.email[0]).to.eql(\"This email is taken.\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"image\": null,\r\n        \"username\": \"{{$randomWord}}{{$randomInt}}\",\r\n        \"bio\": null,\r\n        \"email\": \"rostik.210111@gmail.com\",\r\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTM2ODMsInVzZXJuYW1lIjoidGVzdHR0dCIsImV4cCI6MTY2NTIzMDM2NiwiaWF0IjoxNjYwMDQ2MzY2fQ.X81RtbFGBXEqYAYxeeanWUHyVghpnB5K_4_FVywVhw0\",\r\n        \"effectiveImage\": \"https://static.productionready.io/images/smiley-cyrus.jpg\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user",
+							"host": [
+								"{{url}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user's info with an empty values",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicUnsuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"\r",
+									"pm.test(\"Error message about invalid username\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors.username[0]).to.eql(\"Username must start with a letter, have no spaces, and be 3 - 40 characters.\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Error message about invalid email\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.errors.email[0]).to.eql(\"This email does not seem valid.\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"image\": null,\r\n        \"username\": \"\",\r\n        \"bio\": null,\r\n        \"email\": \"\",\r\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTM2ODMsInVzZXJuYW1lIjoidGVzdHR0dCIsImV4cCI6MTY2NTIzMDM2NiwiaWF0IjoxNjYwMDQ2MzY2fQ.X81RtbFGBXEqYAYxeeanWUHyVghpnB5K_4_FVywVhw0\",\r\n        \"effectiveImage\": \"https://static.productionready.io/images/smiley-cyrus.jpg\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user",
+							"host": [
+								"{{url}}user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Succefsull updating user's info",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains all keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData).to.have.all.keys(\"user\")\r",
+									"  pm.expect(jsonData.user).to.have.all.keys(\"username\", \"email\", \"token\", \"bio\", \"image\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\r\n        \"image\": null,\r\n        \"username\": \"{{$randomWord}}{{$randomInt}}\",\r\n        \"bio\": null,\r\n        \"email\": \"{{$randomEmail}}\",\r\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTM2ODMsInVzZXJuYW1lIjoidGVzdHR0dCIsImV4cCI6MTY2NTIzMDM2NiwiaWF0IjoxNjYwMDQ2MzY2fQ.X81RtbFGBXEqYAYxeeanWUHyVghpnB5K_4_FVywVhw0\",\r\n        \"effectiveImage\": \"https://static.productionready.io/images/smiley-cyrus.jpg\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}user",
+							"host": [
+								"{{url}}user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get other user profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains all keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"   pm.expect(jsonData).to.have.all.keys(\"profile\")\r",
+									"   pm.expect(jsonData.profile).to.have.all.keys(\"username\", \"bio\", \"image\", \"following\")\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Username value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.profile.username).to.eql(pm.environment.get('usernameTest'))\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}profiles/{{usernameTest}}",
+							"host": [
+								"{{url}}profiles"
+							],
+							"path": [
+								"{{usernameTest}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Follow user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains all keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"   pm.expect(jsonData).to.have.all.keys(\"profile\")\r",
+									"   pm.expect(jsonData.profile).to.have.all.keys(\"username\", \"bio\", \"image\", \"following\")\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Username value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.profile.username).to.eql(pm.environment.get('usernameTest'))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Chel if user is followed\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.profile.following).to.eql(true)\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}profiles/{{usernameTest}}/follow",
+							"host": [
+								"{{url}}profiles"
+							],
+							"path": [
+								"{{usernameTest}}",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unfollow user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"eval(environment.registration)();\r",
+									"\r",
+									"eval(environment.followUser)();"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"eval(globals.basicSuccessfulTests)();\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response contains all keys\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"   pm.expect(jsonData).to.have.all.keys(\"profile\")\r",
+									"   pm.expect(jsonData.profile).to.have.all.keys(\"username\", \"bio\", \"image\", \"following\")\r",
+									"})\r",
+									"\r",
+									"\r",
+									"pm.test(\"Username value from response is the same as environment\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.profile.username).to.eql(pm.environment.get('usernameTest'))\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Chel if user is unfollowed\", function () {\r",
+									"  const jsonData = pm.response.json();\r",
+									"  pm.expect(jsonData.profile.following).to.eql(false)\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}profiles/{{usernameTest}}/follow",
+							"host": [
+								"{{url}}profiles"
+							],
+							"path": [
+								"{{usernameTest}}",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//НЕ ЧІПАТИ СКИПТИ НИЖЧЕ!!",
+					"//Скрипт для реєстрації",
+					"postman.setEnvironmentVariable('registration', () => {",
+					"    ",
+					"    const url = pm.environment.get('url');",
+					"    const username = pm.variables.replaceIn('{{$randomWord}}{{$randomInt}}');",
+					"    const email = pm.variables.replaceIn('{{$randomEmail}}');",
+					"    const password = pm.variables.replaceIn('{{$randomWord}}1E');",
+					"",
+					"    const registrationRequest = {",
+					"    url: url + 'users',",
+					"    method: 'POST',",
+					"    header: {",
+					"        'Content-Type': 'application/json',",
+					"    },",
+					"    body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            \"user\": {",
+					"                \"username\": username,",
+					"                \"email\": email,",
+					"                \"password\": password",
+					"          }",
+					"        })",
+					"      }",
+					"    };",
+					"",
+					"    pm.sendRequest(registrationRequest, (error, response) => {",
+					"        console.log(error ? error : response.json());",
+					"        pm.environment.set(\"email\", response.json().user.email);",
+					"        pm.environment.set(\"password\", password);",
+					"        pm.environment.set(\"token\", response.json().user.token);",
+					"        pm.environment.set(\"username\", response.json().user.username)",
+					"    });",
+					"});",
+					"",
+					"",
+					"//Скрипт для логіну з тестовими даними(НЕ ВИКОРИСТОВУВАТИ В UPDATE USER)",
+					"postman.setEnvironmentVariable('login', () => {",
+					"",
+					"    const url = pm.environment.get('url');",
+					"    const email = pm.variables.replaceIn('tstsaccount@gmail.com')",
+					"    const password = pm.variables.replaceIn('testaccount')",
+					"",
+					"    const loginRequest = {",
+					"    url: url + 'users/login',",
+					"    method: 'POST',",
+					"    header: {",
+					"        'Content-Type': 'application/json',",
+					"    },",
+					"    body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            \"user\": {",
+					"                \"email\": email,",
+					"                \"password\": password",
+					"          }",
+					"        })",
+					"      }",
+					"    };",
+					"",
+					"    pm.sendRequest(loginRequest, (error, response) => {",
+					"        console.log(error ? error : response.json());",
+					"        pm.environment.set(\"token\", response.json().user.token);",
+					"        pm.environment.set(\"usernameTest\", response.json().user.username)",
+					"    });",
+					"})",
+					"",
+					"",
+					"//Скрипт створення публікації",
+					"postman.setEnvironmentVariable('createArticle', () => {",
+					"    const localToken = pm.environment.get('token');",
+					"    const url = pm.environment.get('url');",
+					"    const title = pm.variables.replaceIn('{{$randomLoremWord}}');",
+					"    const description = pm.variables.replaceIn('{{$randomLoremWord}}');",
+					"    const body = pm.variables.replaceIn('{{$randomWord}}1E');",
+					"    const tag = pm.variables.replaceIn('{{$randomWord}}1E');",
+					"",
+					"    const createArticleRequest = {",
+					"        url: url + 'articles',",
+					"        method: 'POST',",
+					"        header: {",
+					"        'Content-Type': 'application/json',",
+					"        'Authorization': 'Token ' + localToken,",
+					"        },",
+					"        body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            \"article\": {",
+					"                \"title\": title,",
+					"                \"description\": description,",
+					"                \"body\": body,",
+					"                \"tagList\": [tag]",
+					"          }",
+					"        })",
+					"      }",
+					"    }",
+					"",
+					"    pm.sendRequest(createArticleRequest, (error, response) => {",
+					"      console.log(error ? error : response.json());",
+					"      pm.environment.set(\"slug\", response.json().article.slug);",
+					"      pm.environment.set(\"title\", response.json().article.title);",
+					"      pm.environment.set(\"description\", response.json().article.description);",
+					"      pm.environment.set(\"body\", response.json().article.body);",
+					"      pm.environment.set(\"tag\", tag);",
+					"    });",
+					"})",
+					"",
+					"",
+					"//Скрипт видалення публікації",
+					"postman.setEnvironmentVariable('deleteArticle', () => {",
+					"",
+					"    const localToken = pm.environment.get('token');",
+					"    const url = pm.environment.get('url');",
+					"    const slug = pm.environment.get('slug');",
+					"",
+					"    const articleRequest = {",
+					"        url: url + 'articles/' + slug,",
+					"        method: 'DELETE',",
+					"        header: {",
+					"        'Content-Type': 'application/json',",
+					"        'Authorization': 'Token ' + localToken,",
+					"        },",
+					"        body: {",
+					"            mode: 'none',",
+					"        }",
+					"    }",
+					"",
+					"    pm.sendRequest(articleRequest, (error, response) => {",
+					"    })",
+					"",
+					"})",
+					"",
+					"//Скрипт створення коментаря",
+					"postman.setEnvironmentVariable('postComment', () => {",
+					"",
+					"    const localToken = pm.environment.get('token');",
+					"    const url = pm.environment.get('url');",
+					"    const slug = pm.environment.get('slug');",
+					"    const comment = pm.variables.replaceIn('{{$randomLoremWord}}')",
+					"",
+					"    const postCommentRequest = {",
+					"        url: url + 'articles/' + slug + '/comments',",
+					"        method: 'POST',",
+					"        header: {",
+					"        'Content-Type': 'application/json',",
+					"        'Authorization': 'Token ' + localToken,",
+					"        },",
+					"        body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            \"comment\": {",
+					"                \"body\": comment,",
+					"          }",
+					"        })",
+					"      }",
+					"    }",
+					"",
+					"    pm.sendRequest(postCommentRequest, (error, response) => {",
+					"        console.log(error ? error : response.json());  ",
+					"        pm.environment.set(\"commentId\", response.json().comment.id);",
+					"        pm.environment.set(\"commentBody\", response.json().comment.body);",
+					"    });",
+					"",
+					"})",
+					"",
+					"//Дико вибачаюсь за такий костиль, але воно хоча б працює",
+					"postman.setEnvironmentVariable('setUpComment', () => {",
+					"    const url = pm.environment.get('url');",
+					"    const email = pm.variables.replaceIn('tstsaccount@gmail.com')",
+					"    const password = pm.variables.replaceIn('testaccount')",
+					"    const localToken = pm.environment.get('token');",
+					"    const title = pm.variables.replaceIn('{{$randomLoremWord}}');",
+					"    const description = pm.variables.replaceIn('{{$randomLoremWord}}');",
+					"    const body = pm.variables.replaceIn('{{$randomWord}}1E');",
+					"    const tag = pm.variables.replaceIn('{{$randomWord}}1E');",
+					"    const comment = pm.variables.replaceIn('{{$randomLoremWord}}')",
+					"",
+					"    const loginRequest = {",
+					"        url: url + 'users/login',",
+					"        method: 'POST',",
+					"        header: {",
+					"            'Content-Type': 'application/json',",
+					"        },",
+					"        body: {",
+					"            mode: 'raw',",
+					"            raw: JSON.stringify({",
+					"                \"user\": {",
+					"                    \"email\": email,",
+					"                    \"password\": password",
+					"            }",
+					"            })",
+					"        }",
+					"    };",
+					"",
+					"    const createArticleRequest = {",
+					"        url: url + 'articles',",
+					"        method: 'POST',",
+					"        header: {",
+					"        'Content-Type': 'application/json',",
+					"        'Authorization': 'Token ' + localToken,",
+					"        },",
+					"        body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            \"article\": {",
+					"                \"title\": title,",
+					"                \"description\": description,",
+					"                \"body\": body,",
+					"                \"tagList\": [tag]",
+					"          }",
+					"        })",
+					"      }",
+					"    }",
+					"    // Я переніс postCommentRequest в самий запит оскільки в інакшому випадку воно ловило slug з минулого поста",
+					"    pm.sendRequest(loginRequest, (error, response) => {",
+					"        console.log(error ? error : response.json());",
+					"        pm.environment.set(\"token\", response.json().user.token);",
+					"        pm.environment.set(\"usernameTest\", response.json().user.username)",
+					"            pm.sendRequest(createArticleRequest, (error, response) => {",
+					"            console.log(error ? error : response.json());",
+					"            pm.environment.set(\"slug\", response.json().article.slug);",
+					"            pm.environment.set(\"title\", response.json().article.title);",
+					"            pm.environment.set(\"description\", response.json().article.description);",
+					"            pm.environment.set(\"body\", response.json().article.body);",
+					"            pm.environment.set(\"tag\", tag);",
+					"            const postCommentRequest = {",
+					"                    url: url + 'articles/' + pm.environment.get('slug') + '/comments',",
+					"                    method: 'POST',",
+					"                    header: {",
+					"                    'Content-Type': 'application/json',",
+					"                    'Authorization': 'Token ' + localToken,",
+					"                    },",
+					"                    body: {",
+					"                    mode: 'raw',",
+					"                    raw: JSON.stringify({",
+					"                        \"comment\": {",
+					"                            \"body\": comment,",
+					"                    }",
+					"                    })",
+					"                }",
+					"                }",
+					"                pm.sendRequest(postCommentRequest, (error, response) => {",
+					"                console.log(error ? error : response.json());  ",
+					"                pm.environment.set(\"commentId\", response.json().comment.id);",
+					"                pm.environment.set(\"commentBody\", response.json().comment.body);",
+					"                });",
+					"            });",
+					"    });",
+					"})",
+					"",
+					"//Скрипт видалення коментаря",
+					"postman.setEnvironmentVariable('deleteComment', () => {",
+					"    ",
+					"    const localToken = pm.environment.get('token');",
+					"    const url = pm.environment.get('url');",
+					"    const slug = pm.environment.get('slug');",
+					"    const commentId = pm.environment.get('commentId');",
+					"",
+					"    const articleRequest = {",
+					"        url: url + 'articles/' + slug + '/comments/' + commentId,",
+					"        method: 'DELETE',",
+					"        header: {",
+					"        'Content-Type': 'application/json',",
+					"        'Authorization': 'Token ' + localToken,",
+					"        },",
+					"        body: {",
+					"            mode: 'none',",
+					"        }",
+					"    }",
+					"",
+					"    pm.sendRequest(articleRequest, (error, response) => {",
+					"    })",
+					"",
+					"})",
+					"",
+					"//Скрипт лайку публікації",
+					"postman.setEnvironmentVariable('likeArticle', () => {",
+					"    const localToken = pm.environment.get('token');",
+					"    const url = pm.environment.get('url');",
+					"    const slug = pm.environment.get('slug');",
+					"",
+					"    const likeRequest = {",
+					"        url: url + 'articles/' + slug + '/favourite',",
+					"        method: 'POST',",
+					"        header: {",
+					"        'Content-Type': 'application/json',",
+					"        'Authorization': 'Token ' + localToken,",
+					"        },",
+					"        body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            ",
+					"        })",
+					"      }",
+					"    }",
+					"",
+					"    pm.sendRequest(likeRequest, (error, response) => {",
+					"        console.log(error ? error : response.json());  ",
+					"    });",
+					"",
+					"})",
+					"",
+					"//Скрипт фоллову на юзера",
+					"postman.setEnvironmentVariable('followUser', () => {",
+					"    const localToken = pm.environment.get('token');",
+					"    const url = pm.environment.get('url');",
+					"    const user = pm.environment.get('usernameTest');",
+					"",
+					"    const likeRequest = {",
+					"        url: url + 'articles/' + user + '/follow',",
+					"        method: 'POST',",
+					"        header: {",
+					"        'Content-Type': 'application/json',",
+					"        'Authorization': 'Token ' + localToken,",
+					"        },",
+					"        body: {",
+					"        mode: 'raw',",
+					"        raw: JSON.stringify({",
+					"            ",
+					"        })",
+					"      }",
+					"    }",
+					"",
+					"    pm.sendRequest(likeRequest, (error, response) => {",
+					"        console.log(error ? error : response.json());  ",
+					"    });",
+					"",
+					"})",
+					"",
+					"",
+					"//Далі йдуть глобальні тести",
+					"",
+					"postman.setGlobalVariable('basicSuccessfulTests', () => {",
+					"    pm.test(\"Status code is successful(2xx)\", function () {",
+					"        pm.expect(pm.response.code).to.be.oneOf([200,201,202,204]);",
+					"    });     ",
+					"",
+					"    pm.test(\"Response time is less than 700ms\", function () {",
+					"        pm.expect(pm.response.responseTime).to.be.below(700);",
+					"    });",
+					"",
+					"    pm.test(\"Content-Type is present\", function () {",
+					"    pm.response.to.have.header(\"Content-Type\");",
+					"});",
+					"",
+					"",
+					"})",
+					"",
+					"",
+					"",
+					"postman.setGlobalVariable('basicUnsuccessfulTests', () => {",
+					"    pm.test(\"Status code is Unsuccessful(4xx)\", function () {",
+					"        pm.expect(pm.response.code).to.be.oneOf([400,401,402,403,404,422]);",
+					"    });     ",
+					"",
+					"    pm.test(\"Response time is less than 700ms\", function () {",
+					"        pm.expect(pm.response.responseTime).to.be.below(700);",
+					"    });",
+					"    ",
+					"    pm.test(\"Content-Type is present\", function () {",
+					"    pm.response.to.have.header(\"Content-Type\");",
+					"});",
+					"",
+					"",
+					"})",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
